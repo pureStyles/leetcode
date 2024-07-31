@@ -13,4 +13,22 @@ public class Solution_20240731 {
         }
         return steps;
     }
+
+    public int lengthOfLastWord(String s) {
+        int lastIndex = s.length() - 1;
+        if (lastIndex == 0) {
+            return 1;
+        }
+        int result = 0;
+        for (int i = lastIndex; i >= 0; i--) {
+            if (s.charAt(i) != ' ') {
+                // 是空格字符串
+                result++;
+                if ((i - 1 >= 0) && s.charAt(i - 1) == ' ') {
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 }
