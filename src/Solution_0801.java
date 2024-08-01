@@ -19,4 +19,30 @@ public class Solution_0801 {
         }
         return -1;
     }
+
+    public int hIndex(int[] citations) {
+        int len = citations.length;
+        for (int i = len; i > 0; i--) {
+            int sum = 0;
+            for (int j = 0; j < len; j++) {
+                if (i == len && citations[j] < i) {
+                    break;
+                }
+                if (citations[j] >= i) {
+                    sum++;
+                }
+            }
+            if (sum >= i) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        Solution_0801 solution = new Solution_0801();
+        int[] nums = new int[]{1, 3, 1};
+        int hIndex = solution.hIndex(nums);
+        System.out.println(hIndex);
+    }
 }
