@@ -31,7 +31,7 @@ public class Solution_0805 {
         return max;
     }
 
-    public int trap(int[] height) {
+    public int trap2(int[] height) {
         int sum = 0;
         int len = height.length;
         for (int i = 1; i < len - 1; i++) {
@@ -62,5 +62,43 @@ public class Solution_0805 {
             }
         }
         return sum;
+    }
+
+    public int trap(int[] height) {
+        int sum = 0;
+        int len = height.length;
+        for (int i = 1; i < len - 1; i++) {
+            /**
+             * 找出i左侧最大并记录在数组里
+             * 可以省去许多的重复计算
+             * 策略：空间换时间
+             */
+            int maxLeft = maxLeft2Index(height, i);
+            int maxRight = maxRight2Index(height, i);
+            int less = Math.min(maxLeft, maxRight);
+            if (height[i] < less) {
+                sum += (less - height[i]);
+            }
+        }
+        return sum;
+    }
+
+    public int maxLeft2Index(int[] height, int index) {
+        int[] dp = new int[index + 1];
+        dp[0] = -1;
+        for (int i = 1; i < index; i++) {
+            dp[i] = Math.max(dp[i - 1], height[i - 1]);
+        }
+        return dp[index];
+    }
+
+    public int maxRight2Index(int[] height, int index) {
+        int len = height.length;
+        int[] dp = new int[len];
+        dp[len - 1] = -1;
+        for (int i = len - 2; i >= index; i--) {
+            dp[i] = Math.max(dp[i + 1], height[i + 1]);
+        }
+        return dp[index];
     }
 }
