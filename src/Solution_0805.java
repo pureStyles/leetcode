@@ -64,7 +64,7 @@ public class Solution_0805 {
         return sum;
     }
 
-    public int trap(int[] height) {
+    public int trap3(int[] height) {
         int sum = 0;
         int len = height.length;
         for (int i = 1; i < len - 1; i++) {
@@ -100,5 +100,27 @@ public class Solution_0805 {
             dp[i] = Math.max(dp[i + 1], height[i + 1]);
         }
         return dp[index];
+    }
+
+    public int trap(int[] height) {
+        int sum = 0;
+        int len = height.length;
+        int[] maxLeftDP = new int[len];
+        int[] maxRightDP = new int[len];
+        maxLeftDP[0] = -1;
+        for (int i = 1; i < len; i++) {
+            maxLeftDP[i] = Math.max(maxLeftDP[i - 1], height[i - 1]);
+        }
+        maxRightDP[len - 1] = -1;
+        for (int i = len - 2; i >= 0; i--) {
+            maxRightDP[i] = Math.max(maxRightDP[i + 1], height[i + 1]);
+        }
+        for (int i = 1; i < len - 1; i++) {
+            int less = Math.min(maxLeftDP[i], maxRightDP[i]);
+            if (less > height[i]) {
+                sum += (less - height[i]);
+            }
+        }
+        return sum;
     }
 }
