@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Solution_0812 {
     public String reverseWords(String s) {
         if (s.length() == 1) {
@@ -20,6 +23,30 @@ public class Solution_0812 {
 
         }
         return sb.toString().trim();
+    }
+
+    public String convert(int rowNums, String s) {
+        if (rowNums == 1) {
+            return s;
+        }
+        List<StringBuilder> rows = new ArrayList<StringBuilder>(rowNums);
+        int len = s.length();
+        for (int i = 0; i < rowNums; i++) {
+            rows.add(new StringBuilder());
+        }
+        int i = 0, flag = -1;
+        for (char c : s.toCharArray()) {
+            rows.get(i).append(c);
+            if (i == 0 || i == rowNums - 1) {
+                flag = -flag;
+            }
+            i += flag;
+        }
+        StringBuilder res = new StringBuilder();
+        for (StringBuilder sb : rows) {
+            res.append(sb);
+        }
+        return res.toString();
     }
 
     public static void main(String[] args) {
