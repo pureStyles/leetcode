@@ -35,10 +35,29 @@ public class Solution_0808 {
         return c;
     }
 
+    public String reverseWords(String s) {
+        StringBuffer sb = new StringBuffer();
+        int len = s.length();
+        boolean isStart = false;
+        for (int i = len - 1; i >= 0; i--) {
+            if (isStart) {
+                sb.append(s.charAt(i));
+            }
+            if (i > 0 && s.charAt(i) == ' ' && s.charAt(i - 1) != ' ') {
+                isStart = true;
+            }
+            if (i > 0 && s.charAt(i) != ' ' && s.charAt(i - 1) == ' ') {
+                isStart = false;
+            }
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         Solution_0808 solution = new Solution_0808();
-        String[] strs = {"flower", "flow", "flight"};
-        String prefix = solution.longestCommonPrefix1(strs);
-        System.out.println(prefix);
+        String s = "the sky is blue";
+        String res = solution.reverseWords(s);
+        System.out.println(res);
+
     }
 }
