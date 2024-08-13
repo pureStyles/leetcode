@@ -45,6 +45,24 @@ public class Solution_0813 {
         return false;
     }
 
+    public int[] twoSum(int[] numbers, int target) {
+        int len = numbers.length;
+        for (int i = 0; i < len; ) {
+            for (int j = len - 1; j > i; ) {
+                if (numbers[i] + numbers[j] == target) {
+                    return new int[]{i + 1, j + 1};
+                }
+                if (numbers[i] + numbers[j] > target) {
+                    j--;
+                }
+                if (numbers[i] + numbers[j] < target) {
+                    i++;
+                }
+            }
+        }
+        return new int[]{1, 2};
+    }
+
     public static void main(String[] args) {
         Solution_0813 solution = new Solution_0813();
 //        String s = ".,";
