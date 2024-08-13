@@ -24,10 +24,34 @@ public class Solution_0813 {
         return true;
     }
 
+    public boolean isSubSequence(String s, String t) {
+        int len1 = s.length(), len2 = t.length();
+        if (len1 > len2) {
+            return false;
+        }
+        if (len1 == 0) {
+            return true;
+        }
+        int p = 0;
+        for (int i = 0; i < len2; ) {
+            if (s.charAt(p) == t.charAt(i)) {
+                p++;
+            }
+            i++;
+            if (p == len1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         Solution_0813 solution = new Solution_0813();
-        String s = ".,";
-        boolean result = solution.isPalindrome(s);
+//        String s = ".,";
+//        boolean result = solution.isPalindrome(s);
+//        System.out.println(result);
+        String s = "abc", t = "ahbgdc";
+        boolean result = solution.isSubSequence(s, t);
         System.out.println(result);
     }
 }
