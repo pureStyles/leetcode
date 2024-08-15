@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Solution_0814 {
     public int maxArea1(int[] height) {
         int len = height.length;
@@ -36,6 +40,35 @@ public class Solution_0814 {
             }
         }
         return volume;
+    }
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        for (int k = 0; k < len - 2; k++) {
+            if (nums[k] > 0) {
+                break;
+            }
+            if (k > 0 && nums[k] == nums[k - 1]) {
+                continue;
+            }
+            int left = k + 1, right = len - 1;
+            while (left < right) {
+                int sum = nums[k] + nums[left] + nums[right];
+                if (sum > 0) {
+                    while (left < right && nums[right] == nums[--right]) ;
+                } else if (sum < 0) {
+                    while (left < right && nums[left] == nums[++left]) ;
+                } else {
+                    // sum = 0;
+                    res.add(new ArrayList<Integer>(Arrays.asList(nums[k], nums[left], nums[right])));
+                    while (left < right && nums[left] == nums[++left]) ;
+                    while (left < right && nums[right] == nums[--right]) ;
+                }
+            }
+        }
+        return res;
     }
 
     public static void main(String[] args) {
