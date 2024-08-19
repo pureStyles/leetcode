@@ -1,7 +1,7 @@
 import java.util.Stack;
 
 public class Solution_0819 {
-    public boolean isValid(String s) {
+    public boolean isValid1(String s) {
         Stack<Character> stack = new Stack<>();
         int len = s.length();
         for (int i = 0; i < len; i++) {
@@ -47,6 +47,23 @@ public class Solution_0819 {
             return true;
         }
         return false;
+    }
+
+    public boolean isValid(String s) {
+        int len = s.length();
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(')');
+            } else if (s.charAt(i) == ('[')) {
+                stack.push(']');
+            } else if (s.charAt(i) == '{') {
+                stack.push('}');
+            } else if (stack.empty() || stack.pop() != s.charAt(i)) {
+                return false;
+            }
+        }
+        return stack.empty();
     }
 
     public static void main(String[] args) {
