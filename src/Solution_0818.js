@@ -22,3 +22,29 @@ var lengthOfLongestSubString = function(s){
 
 const s = lengthOfLongestSubString("pwwkew");
 console.log(s);
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function (head) {
+    const set = new Set();
+    while (head !== null) {
+        const prevSize = set.size;
+        set.add(head);
+        const curSize = set.size;
+        if (curSize === prevSize) {
+            return true;
+        }
+        head = head.next;
+    }
+    return false;
+};
