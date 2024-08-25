@@ -20,7 +20,7 @@ public class Solution_0825 {
         return map.get(head);
     }
 
-    public ListNode reverseBetween(ListNode head, int left, int right) {
+    public ListNode reverseBetween1(ListNode head, int left, int right) {
         if (head.next == null) {
             return head;
         }
@@ -54,5 +54,23 @@ public class Solution_0825 {
         }
 
         return map.get(0).next;
+    }
+
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode vNode = new ListNode(1000);
+        vNode.next = head;
+        ListNode pre = vNode, cur, next;
+        for (int i = 1; i < left; i++) {
+            pre = pre.next;
+        }
+
+        cur = pre.next;
+        for (int i = 1; i <= right - left; i++) {
+            next = cur.next;
+            cur.next = next.next;
+            next.next = pre.next;
+            pre.next = next;
+        }
+        return vNode.next;
     }
 }
