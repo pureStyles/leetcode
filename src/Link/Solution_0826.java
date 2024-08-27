@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class Solution_0826 {
     public ListNode removeNthFromEnd1(ListNode head, int n) {
-        ListNode vNode = new ListNode(100);
+        ListNode vNode = new ListNode(1000);
         vNode.next = head;
         ListNode pre = vNode, next, cur;
         while (true) {
@@ -40,4 +40,42 @@ public class Solution_0826 {
         pre.next = pre.next.next;
         return vNode.next;
     }
+
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode vNode = new ListNode(1000);
+        vNode.next = head;
+        ListNode pre = vNode, cur, next;
+        while (pre != null) {
+            cur = pre.next;
+            next = cur.next;
+            while (next.val == cur.val) {
+                next = next.next;
+            }
+            pre.next = next;
+            pre = pre.next;
+        }
+        return vNode.next;
+    }
+
+    public ListNode removeDuplicates(ListNode head) {
+        ListNode vNode = new ListNode(1000);
+        vNode.next = head;
+        ListNode cur = vNode;
+        int x = 10000;
+        while (cur.next != null && cur.next.next != null) {
+            if (cur.next.val == x || cur.next.val == cur.next.next.val) {
+                // 遇到重复的节点值，需要作删除操作
+                x = cur.next.val; // 重复的值记为x
+                cur.next = cur.next.next;
+
+            } else {
+                cur = cur.next;
+            }
+        }
+        if (cur.next != null && cur.next.next == null && cur.next.val == x) {
+            cur.next = null;
+        }
+        return vNode.next;
+    }
+
 }
