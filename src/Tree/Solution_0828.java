@@ -12,4 +12,14 @@ public class Solution_0828 {
         boolean rightIsSame = isSameTree(p.right, q.right);
         return p.val == q.val && leftIsSame && rightIsSame;
     }
+
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode tmp = root.left;
+        root.left = invertTree(root.right);
+        root.right = invertTree(tmp);
+        return root;
+    }
 }
