@@ -27,4 +27,22 @@ public class Solution_0902 {
         rootNode.right = _buildTree(inorder, postorder, inorder_root_index + 1, inorder_right, postorder_left + len_left_subTree, postorder_right - 1);
         return rootNode;
     }
+
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+
+        if (root == null) {
+            return false;
+        }
+        return _hasPathSum(root, targetSum);
+    }
+
+    public boolean _hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+        if (root.left == null && root.right == null && root.val == targetSum) {
+            return true;
+        }
+        return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+    }
 }
