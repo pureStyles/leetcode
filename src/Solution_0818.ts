@@ -48,3 +48,23 @@ var hasCycle = function (head) {
     }
     return false;
 };
+
+function lengthOfLongestSubstring(s: string): number {
+    const len = s.length;
+    if(len === 0){
+        return 0;
+    }
+    const dp:number[] = [];
+    dp[0] = 1;
+    let max: number = 1;
+    for(let i  = 1; i < len; i++){
+        dp[i] = 1;
+        for(let j = 0; j < i; j++){
+            if(s.substring(j, i).indexOf(s[i]) === -1){
+                dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+        }
+        max = Math.max(max, dp[i]);
+    }
+    return max;
+};
