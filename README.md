@@ -1,2 +1,5 @@
 # leetcode
 leetcode solutions
+下面就到创建Compilation实例的时候，Compilation是基于Compiler实例来创建的。
+Compilation又是一个从Tapable继承过来的类
+compiler实例也会被挂载到Compilation累实例上
